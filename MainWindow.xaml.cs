@@ -61,25 +61,16 @@ namespace WinDurango.UI
 
         public void LoadSettings()
         {
-            ExtendsContentIntoTitleBar = Settings.Settings.Theme != UiConfigData.ThemeSetting.System;
-            switch (Settings.Settings.Theme)
+            ExtendsContentIntoTitleBar = true;//Settings.Settings.Theme != UiConfigData.BackdropType.System;
+            SystemBackdrop = Settings.Settings.Backdrop switch
             {
-                case UiConfigData.ThemeSetting.Mica:
-                    this.SystemBackdrop = new MicaBackdrop() { Kind = MicaKind.Base };
-                    break;
-                case UiConfigData.ThemeSetting.MicaAlt:
-                    this.SystemBackdrop = new MicaBackdrop() { Kind = MicaKind.BaseAlt };
-                    break;
-                case UiConfigData.ThemeSetting.Fluent:
-                    this.SystemBackdrop = new DesktopAcrylicBackdrop();
-                    break;
-                case UiConfigData.ThemeSetting.FluentThin:
-                    this.SystemBackdrop = new DesktopAcrylicBackdrop();
-                    break;
-                case UiConfigData.ThemeSetting.System:
-                    this.SystemBackdrop = null;
-                    break;
-            }
+                UiConfigData.BackdropType.Mica => new MicaBackdrop { Kind = MicaKind.Base },
+                UiConfigData.BackdropType.MicaAlt => new MicaBackdrop { Kind = MicaKind.BaseAlt },
+                UiConfigData.BackdropType.AcrylicBase => new AcrylicBackdrop { Kind = DesktopAcrylicKind.Base },
+                UiConfigData.BackdropType.AcrylicDefault => new AcrylicBackdrop { Kind = DesktopAcrylicKind.Default },
+                UiConfigData.BackdropType.AcrylicThin => new AcrylicBackdrop { Kind = DesktopAcrylicKind.Thin },
+                _ => null
+            };
         }
 
         private void OnNavigate(object sender, NavigatingCancelEventArgs e)

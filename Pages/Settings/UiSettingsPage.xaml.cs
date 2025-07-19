@@ -22,35 +22,24 @@ namespace WinDurango.UI.Pages.Settings
                 PatchSourceButton.SelectedItem = psbSelected;
             }
 
-            ComboBoxItem themeSelected = themeButton.Items
+            ComboBoxItem themeSelected = backdropComboBox.Items
                 .OfType<ComboBoxItem>()
-                .FirstOrDefault(item => item.Tag.ToString() == App.Settings.Settings.Theme.ToString());
-            if (themeSelected != null && (ComboBoxItem)themeButton.SelectedItem != themeSelected)
+                .FirstOrDefault(item => item.Tag.ToString() == App.Settings.Settings.Backdrop.ToString());
+            if (themeSelected != null && (ComboBoxItem)backdropComboBox.SelectedItem != themeSelected)
             {
-                themeButton.SelectedItem = themeSelected;
+                backdropComboBox.SelectedItem = themeSelected;
             }
 
             HorizontalScrollingToggle.IsOn = App.Settings.Settings.AppViewIsHorizontalScrolling;
         }
 
-        private void OnThemeSelected(object sender, RoutedEventArgs e)
+        private void OnBackdropSelected(object sender, RoutedEventArgs e)
         {
-            if (themeButton.SelectedItem is not ComboBoxItem sel)
-            {
-                return;
-            }
+            if (backdropComboBox.SelectedItem is not ComboBoxItem sel) return;
+            if (!Enum.TryParse(sel.Tag.ToString(), out UiConfigData.BackdropType backdrop)) return;
+            if (App.Settings.Settings.Backdrop == backdrop) return;
 
-            if (!Enum.TryParse(sel.Tag.ToString(), out UiConfigData.ThemeSetting theme))
-            {
-                return;
-            }
-
-            if (App.Settings.Settings.Theme == theme)
-            {
-                return;
-            }
-
-            App.Settings.Set("Theme", theme);
+            App.Settings.Set("Backdrop", backdrop);
         }
 
         private async void OnSourceSelected(object sender, RoutedEventArgs e)

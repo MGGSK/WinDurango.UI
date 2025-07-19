@@ -12,17 +12,19 @@
         <!-- TODO: Use SettingsCard -->
         <!-- TODO: Also make easy way for settings to be set... I believe there is a Tag thing where you can put custom value. Not sure if SettingsCard already has a way.-->
         <StackPanel Padding="16">
-            <TextBlock Margin="0 5 0 5" Text="Theme"/>
             <ComboBox 
-                x:Name="themeButton"
+                x:Name="backdropComboBox"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top"
                 Margin="0 5 0 5"
-                SelectionChanged="OnThemeSelected">
+                Header="Backdrop"
+                SelectionChanged="OnBackdropSelected">
                 <ComboBoxItem Content="Mica" Tag="Mica"/>
                 <ComboBoxItem Content="Mica Alt" Tag="MicaAlt"/>
-                <ComboBoxItem Content="Fluent" Tag="Fluent"/>
-                <ComboBoxItem Content="System (No Theme)" Tag="System"/>
+                <ComboBoxItem Content="Acrylic Base" Tag="AcrylicBase"/>
+                <ComboBoxItem Content="Acrylic Default" Tag="AcrylicDefault"/>
+                <ComboBoxItem Content="Acrylic Thin" Tag="AcrylicThin"/>
+                <ComboBoxItem Content="No backdrop" Tag="None"/>
             </ComboBox>
 
             <TextBlock Margin="0 5 0 5" Text="Download Source"/>

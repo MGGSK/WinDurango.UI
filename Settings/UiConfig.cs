@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
@@ -8,13 +9,14 @@ namespace WinDurango.UI.Settings;
 
 public class UiConfigData
 {
-    public enum ThemeSetting
+    public enum BackdropType
     {
-        Fluent,
-        FluentThin,
+        None,
         Mica,
         MicaAlt,
-        System
+        AcrylicBase,
+        AcrylicDefault,
+        AcrylicThin,
     }
 
     public enum PatchSource
@@ -23,8 +25,10 @@ public class UiConfigData
         Artifact
     }
 
+    public ElementTheme Theme { get; set; } = ElementTheme.Default;
+    public BackdropType Backdrop { get; set; } = BackdropType.Mica;
+
     public uint SaveVersion { get; set; } = App.VerPacked;
-    public ThemeSetting Theme { get; set; } = ThemeSetting.Fluent;
     public bool DebugLoggingEnabled { get; set; } = false;
     public bool AppViewIsHorizontalScrolling { get; set; } = false;
 
